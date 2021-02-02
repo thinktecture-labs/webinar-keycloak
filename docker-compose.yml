@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:12.0.2
+    ports:
+      - 8080:8080
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - KEYCLOAK_FRONTEND_URL=http://localhost:8080/auth/
+      - KEYCLOAK_IMPORT=/tmp/keycloak/webinar-realm.json
+      - JAVA_OPTS=-Dkeycloak.profile.feature.upload_scripts=enabled
+    volumes:
+      - ./keycloak:/tmp/keycloak
+  api:
+    build:
+      context: src/api/.
+      dockerfile: Dockerfile
+    ports:
+      - 5000:80
+  frontend:
+    build:
+      context: src/frontend/.
+      dockerfile: Dockerfile
+    ports:
+      - 4200:80

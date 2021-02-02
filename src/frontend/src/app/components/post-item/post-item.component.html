@@ -1,0 +1,33 @@
+<div class="card" *ngIf="post != null">
+  <div class="card-body">
+    <h5 class="card-title">
+      {{ post.title }}
+      <span *ngIf="post.publishDate == null" class="badge bg-secondary"
+        >Not published</span
+      >
+    </h5>
+    <p class="card-text">{{ post.excerpt }}</p>
+    <div class="d-flex flex-row bd-highlight mb-3">
+      <div class="p-2">
+        <button [routerLink]="['post', post.id]" class="btn btn-primary">
+          Read more
+        </button>
+      </div>
+      <div>
+        <div class="p-2" *ngIf="security.isPublisher() && post.publishDate == null">
+          <button (click)="publish()" class="btn btn-success">Publish</button>
+        </div>
+        <div class="p-2" *ngIf="canUnpublish && post.publishDate != null">
+          <button (click)="unpublish()" class="btn btn-danger">
+            Unpublish
+          </button>
+        </div>
+      </div>
+      <div *ngIf="security.isEditor()">
+        <div class="p-2" *ngIf="post.publishDate == null">
+          <button (click)="delete()" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

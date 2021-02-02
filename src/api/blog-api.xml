@@ -1,0 +1,311 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>blog-api</name>
+    </assembly>
+    <members>
+        <member name="T:blog_api.ClaimsPrincipalExtensions">
+            <summary>
+            Extensions for claims principal
+            </summary>
+        </member>
+        <member name="M:blog_api.ClaimsPrincipalExtensions.IsEditorOrPublisher(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Determines whether the user has the editor- or publisher-role.
+            </summary>
+            <param name="principal">The principal.</param>
+            <returns>
+              <c>true</c> if the user has the editor- or publisher-role; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:blog_api.Controllers.Posts">
+            <summary>
+            Controller to handle posts
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="M:blog_api.Controllers.Posts.#ctor(blog_api.Models.BlogContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:blog_api.Controllers.Posts"/> class.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="M:blog_api.Controllers.Posts.Index">
+            <summary>
+            Endpoint to retrieve a list of all posts.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:blog_api.Controllers.Posts.Index(System.Int32)">
+            <summary>
+            Endpoint to retrieve a single post.
+            </summary>
+            <param name="id">The identifier of the post.</param>
+            <returns></returns>
+        </member>
+        <member name="M:blog_api.Controllers.Posts.Post(blog_api.Models.PostInputModel)">
+            <summary>
+            Endpoint to create a new post.
+            </summary>
+            <param name="model">The model.</param>
+            <returns></returns>
+        </member>
+        <member name="M:blog_api.Controllers.Posts.Publish(System.Int32)">
+            <summary>
+            Endpoint to publish a post.
+            </summary>
+            <param name="id">The identifier of the post.</param>
+            <returns></returns>
+        </member>
+        <member name="M:blog_api.Controllers.Posts.Unpublish(System.Int32)">
+            <summary>
+            Endpoint to unpublish a post.
+            </summary>
+            <param name="id">The identifier of the post.</param>
+            <returns></returns>
+        </member>
+        <member name="M:blog_api.Controllers.Posts.Delete(System.Int32)">
+            <summary>
+            Endpoint to delete a post.
+            </summary>
+            <param name="id">The identifier of the post.</param>
+            <returns></returns>
+        </member>
+        <member name="T:blog_api.JwtBearerOptions">
+            <summary>
+            Options for JWT Bearer authentication.
+            </summary>
+        </member>
+        <member name="P:blog_api.JwtBearerOptions.Authority">
+            <summary>
+            Gets or sets the authority.
+            </summary>
+            <value>
+            The authority.
+            </value>
+        </member>
+        <member name="P:blog_api.JwtBearerOptions.Audience">
+            <summary>
+            Gets or sets the audience.
+            </summary>
+            <value>
+            The audience.
+            </value>
+        </member>
+        <member name="T:blog_api.KeycloakRolesClaimsTransformation">
+            <summary>
+            Transforms keycloak roles in the resource_access claim to jwt role claims.
+            </summary>
+            <example>
+            Example of keycloack resource_access claim
+            "resource_access": {
+                "blog-api": {
+                    "roles": [
+                        "editor"
+                    ]
+                },
+                "account": {
+                    "roles": [
+                        "view-profile"
+                    ]
+                }
+            },
+            </example>
+            <seealso cref="T:Microsoft.AspNetCore.Authentication.IClaimsTransformation" />
+        </member>
+        <member name="M:blog_api.KeycloakRolesClaimsTransformation.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:blog_api.KeycloakRolesClaimsTransformation"/> class.
+            </summary>
+            <param name="roleClaimType">Type of the role claim.</param>
+            <param name="audience">The audience.</param>
+        </member>
+        <member name="M:blog_api.KeycloakRolesClaimsTransformation.TransformAsync(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Provides a central transformation point to change the specified principal.
+            Note: this will be run on each AuthenticateAsync call, so its safer to
+            return a new ClaimsPrincipal if your transformation is not idempotent.
+            </summary>
+            <param name="principal">The <see cref="T:System.Security.Claims.ClaimsPrincipal" /> to transform.</param>
+            <returns>
+            The transformed principal.
+            </returns>
+        </member>
+        <member name="T:blog_api.Migrations.Initial">
+            <summary>
+            Initial database migration
+            </summary>
+            <seealso cref="T:Microsoft.EntityFrameworkCore.Migrations.Migration" />
+        </member>
+        <member name="M:blog_api.Migrations.Initial.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            <para>
+            Builds the operations that will migrate the database 'up'.
+            </para>
+            <para>
+            That is, builds the operations that will take the database from the state left in by the
+            previous migration so that it is up-to-date with regard to this migration.
+            </para>
+            <para>
+            This method must be overridden in each class the inherits from <see cref="T:Microsoft.EntityFrameworkCore.Migrations.Migration" />.
+            </para>
+            </summary>
+            <param name="migrationBuilder">The <see cref="T:Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder" /> that will build the operations.</param>
+        </member>
+        <member name="M:blog_api.Migrations.Initial.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            <para>
+            Builds the operations that will migrate the database 'down'.
+            </para>
+            <para>
+            That is, builds the operations that will take the database from the state left in by
+            this migration so that it returns to the state that it was in before this migration was applied.
+            </para>
+            <para>
+            This method must be overridden in each class the inherits from <see cref="T:Microsoft.EntityFrameworkCore.Migrations.Migration" /> if
+            both 'up' and 'down' migrations are to be supported. If it is not overridden, then calling it
+            will throw and it will not be possible to migrate in the 'down' direction.
+            </para>
+            </summary>
+            <param name="migrationBuilder">The <see cref="T:Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder" /> that will build the operations.</param>
+        </member>
+        <member name="T:blog_api.Models.BlogContext">
+            <summary>
+            Database context that holds the blog data
+            </summary>
+            <seealso cref="T:Microsoft.EntityFrameworkCore.DbContext" />
+        </member>
+        <member name="M:blog_api.Models.BlogContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{blog_api.Models.BlogContext})">
+            <summary>
+            Initializes a new instance of the <see cref="T:blog_api.Models.BlogContext"/> class.
+            </summary>
+            <param name="options">The options.</param>
+        </member>
+        <member name="P:blog_api.Models.BlogContext.Posts">
+            <summary>
+            Collection to hold posts.
+            </summary>
+            <value>
+            The posts.
+            </value>
+        </member>
+        <member name="T:blog_api.Models.Post">
+            <summary>
+            Represents a blog post
+            </summary>
+        </member>
+        <member name="P:blog_api.Models.Post.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:blog_api.Models.Post.Body">
+            <summary>
+            Gets or sets the body.
+            </summary>
+            <value>
+            The body.
+            </value>
+        </member>
+        <member name="P:blog_api.Models.Post.Excerpt">
+            <summary>
+            Gets or sets the excerpt.
+            </summary>
+            <value>
+            The excerpt.
+            </value>
+        </member>
+        <member name="P:blog_api.Models.Post.PublishDate">
+            <summary>
+            Gets or sets the publish date.
+            </summary>
+            <value>
+            The publish date.
+            </value>
+        </member>
+        <member name="P:blog_api.Models.Post.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>
+            The title.
+            </value>
+        </member>
+        <member name="M:blog_api.Models.Post.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:blog_api.Models.Post"/> class.
+            </summary>
+            <param name="body">The body.</param>
+            <param name="excerpt">The excerpt.</param>
+            <param name="title">The title.</param>
+        </member>
+        <member name="T:blog_api.Program">
+            <summary>
+            Main Entry Point
+            </summary>
+        </member>
+        <member name="M:blog_api.Program.Main(System.String[])">
+            <summary>
+            Defines the entry point of the application.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:blog_api.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Creates the host builder.
+            </summary>
+            <param name="args">The arguments.</param>
+            <returns></returns>
+        </member>
+        <member name="T:blog_api.Roles">
+            <summary>
+            Roles defined for the application.
+            </summary>
+        </member>
+        <member name="F:blog_api.Roles.Editor">
+            <summary>
+            The editor role
+            </summary>
+        </member>
+        <member name="F:blog_api.Roles.Publisher">
+            <summary>
+            The publisher role
+            </summary>
+        </member>
+        <member name="T:blog_api.Startup">
+            <summary>
+            Startup class of the ASP.NET Core application.
+            </summary>
+        </member>
+        <member name="M:blog_api.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:blog_api.Startup"/> class.
+            </summary>
+            <param name="configuration">The configuration.</param>
+        </member>
+        <member name="P:blog_api.Startup.Configuration">
+            <summary>
+            Gets the configuration.
+            </summary>
+            <value>
+            The configuration.
+            </value>
+        </member>
+        <member name="M:blog_api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures the services.
+            </summary>
+            <param name="services">The services.</param>
+        </member>
+        <member name="M:blog_api.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Configures the specified application.
+            </summary>
+            <param name="app">The application.</param>
+            <param name="env">The env.</param>
+        </member>
+    </members>
+</doc>
