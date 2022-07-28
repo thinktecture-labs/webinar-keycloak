@@ -7,6 +7,9 @@ export const environment = {
       realm: 'webinar',
       clientId: 'blog-frontend',
     },
+    initOptions: {
+      checkLoginIframe: false,
+    },
     loadUserProfileAtStartUp: false
   }
 };

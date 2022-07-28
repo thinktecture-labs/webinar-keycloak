@@ -11,7 +11,10 @@ export const environment = {
       realm: 'webinar',
       clientId: 'blog-frontend',
     },
-    loadUserProfileAtStartUp: false
+    initOptions: {
+      checkLoginIframe: false,
+    },
+    loadUserProfileAtStartUp: false,
   }
 };
 
